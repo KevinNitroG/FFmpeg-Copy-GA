@@ -1,0 +1,51 @@
+name: Download
+on:
+  push:
+    paths:
+      - "ENTER_LINKS_HERE.txt"
+  workflow_dispatch:
+  watch:
+    types: [started]
+
+permissions: write-all
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    container:
+      image: linuxserver/ffmpeg
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download video
+        run: scripts/download_script.sh
+
+      - name: Get NAME as Date
+        id: name
+        run: echo "NAME=$(date)" >> $GITHUB_OUTPUT
+
+      - name: Get last tag
+        id: last_tag
+        uses: oprypin/find-latest-tag@v1
+        continue-on-error: true
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          releases-only: true
+
+      - name: Get next tag
+        id: next_tag
+        run: |
+          TAG="${{ steps.last_tag.outputs.tag }}"
+          if [ -z "$TAG" ]; then TAG=0; fi
+          echo "NEXT_TAG=$((TAG + 1))" >> $GITHUB_OUTPUT
+
+      - name: Upload files to a GitHub release
+        uses: svenstaro/upload-release-action@master
+        with:
+          release_name: ${{ steps.name.outputs.NAME }}
+          repo_token: ${{ github.token }}
+          file: ./downloads/*
+          tag: ${{ steps.next_tag.outputs.NEXT_TAG }}
+          file_glob: true
+          overwrite: true

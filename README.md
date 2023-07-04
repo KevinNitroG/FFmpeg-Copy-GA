@@ -1,4 +1,4 @@
-# FFMPEG COPY GA
+# FFMPEG COPY GA ✨
 
 This repo will help you to copy videos and upload to Github Release using [FFmpeg docker][FFmpeg docker] using Github action _(Ubuntu)_
 
@@ -33,6 +33,10 @@ The downloaded files will be named as `Downloaded_*.mp4`
 
 ---
 
+# [GOOGLE COLAB][GOOGLE COLAB]
+
+---
+
 # DISCLAIMER ⚠️
 
 Please don't copy illegal files, films that you don't have the right to copy
@@ -47,3 +51,4 @@ Please don't copy illegal files, films that you don't have the right to copy
 [FFmpeg docker]: https://hub.docker.com/r/linuxserver/ffmpeg
 [ENTER_LINKS_HERE.txt]: ENTER_LINKS_HERE.txt
 [download.yml]: .github/workflows/download.yml
+[GOOGLE COLAB]: https://colab.research.google.com/github/KevinNitroG/FFmpeg-Copy-GA/blob/main/Google_colab_FFmpeg_Copy.ipynb
