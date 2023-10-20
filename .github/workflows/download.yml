@@ -15,7 +15,7 @@ jobs:
     container:
       image: linuxserver/ffmpeg
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Download video
         run: scripts/download_script.sh
